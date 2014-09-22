@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ybjaa="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyActivity">
+
+    <FrameLayout
+        android:id="@+id/main_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    </FrameLayout>
+
+    <com.ybjaa.extend.view.NavMenuPanel
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        android:layout_gravity="left|center_vertical"
+        android:orientation="horizontal"
+        ybjaa:fragment_layout_id="@+id/main_fragment_layout"
+        >
+
+
+        <view
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            class="test01.fragment.ybjaa.testfragment01.FragmentButtonView"
+            ybjaa:fragment_name=".Fragment01"
+            android:background="@drawable/fragment_button_view_background"
+            android:layout_gravity="left|top" />
+
+        <view
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            ybjaa:fragment_name=".Fragment02"
+            android:background="@drawable/fragment_button_view_background"
+            class="test01.fragment.ybjaa.testfragment01.FragmentButtonView"
+            android:layout_gravity="center_horizontal" />
+
+
+        <view
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            ybjaa:fragment_name=".Fragment03"
+            android:background="@drawable/fragment_button_view_background"
+            class="test01.fragment.ybjaa.testfragment01.FragmentButtonView"
+            android:layout_gravity="left|top" />
+
+
+
+    </com.ybjaa.extend.view.NavMenuPanel>
+
+
+
+
+</LinearLayout>

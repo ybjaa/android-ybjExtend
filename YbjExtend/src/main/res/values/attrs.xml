@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="nav_menu_panel_style">
+        <attr name="fragment_layout_id" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="nav_fragment_view_style">
+        <attr name="fragment_name" format="string" />
+    </declare-styleable>
+</resources>
