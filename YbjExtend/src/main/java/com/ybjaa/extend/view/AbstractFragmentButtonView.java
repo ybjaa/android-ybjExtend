@@ -127,7 +127,7 @@ public class AbstractFragmentButtonView extends LinearLayout {
 
         //获取frameLayout的layout
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.nav_fragment_view_style, defStyleAttr, 0);
-        String fragmentName= a.getString(R.styleable.nav_fragment_view_fragment_name);
+        String fragmentName= a.getString(R.styleable.nav_fragment_view_style_fragment_name);
         a.recycle();
 
         //设置交点规则，先子控件，没有再自身
@@ -136,8 +136,6 @@ public class AbstractFragmentButtonView extends LinearLayout {
         if(fragmentName!=null&&!fragmentName.trim().equals(""))
         {
             String s1=context.getPackageName();
-
-
             s1=fragmentName.substring(0,1).equals(".")?s1+fragmentName:fragmentName;
 
             try {
