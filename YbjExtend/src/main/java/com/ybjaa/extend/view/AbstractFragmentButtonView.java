@@ -3,11 +3,8 @@ package com.ybjaa.extend.view;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -18,51 +15,36 @@ import com.ybjaa.extend.R;
 /**
  * Created by 杨冰剑 on 2014/9/17.
  *
- * 导航窗体所存放的点击事件的基类
+ * 导航窗体所存放的点击控件的基类
  *
  */
-public class AbstractFragmentButtonView extends LinearLayout {
+public abstract class AbstractFragmentButtonView extends LinearLayout {
 
 
-
-    protected static int[] mergeDrawableStates(int[] baseState, int[] additionalState) {
-        final int N = baseState.length;
-        int i = N - 1;
-        while (i >= 0 && baseState[i] == 0) {
-            i--;
-        }
-        System.arraycopy(additionalState, 0, baseState, i + 1, additionalState.length);
-        return baseState;
-    }
-
-
-
-   /* public interface IOnKeyDownListener
-    {
-
-        void OnKeyDown(View v,int keyCode, KeyEvent event);
-
-    }
-
-
-
-    public IOnKeyDownListener onKeyDownListener=null;*/
-
-
-  /*  @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if(onKeyDownListener!=null)
-        {
-            onKeyDownListener.OnKeyDown(this,keyCode,event);
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }*/
-
+    /**
+     *
+     * 按下所跳转的fragment
+     *
+     */
     protected Fragment mFragment =null;
 
-    protected boolean mChecked=false;
+
+    /**
+     *
+     * 是否是默认点击的第一项
+     *
+     */
+    protected boolean mIsDefault =false;
+
+
+    /**
+     *
+     * 针对于按下按钮改变其状态时的函数调用
+     *
+     * @state true:选中，false：未选中
+     *
+     */
+    public abstract void stateChange(boolean state);
 
 
 
@@ -80,11 +62,6 @@ public class AbstractFragmentButtonView extends LinearLayout {
         initialize(context, attrs,defStyleAttr);
     }
 
-    @Override
-    public boolean performClick() {
-        return super.performClick();
-
-    }
 
     /**
      *
@@ -113,6 +90,33 @@ public class AbstractFragmentButtonView extends LinearLayout {
     }
 
 
+    /**
+     *
+     * 设置是否是默认的第一项
+     *
+     * @param flag  设置是否是默认的第一项
+     */
+    public void setIsDefault(Boolean flag)
+    {
+        mIsDefault =flag;
+        if(isDefault())
+        {
+            this.performClick();
+        }
+    }
+
+
+    /**
+     *
+     * 获得是否是默认的第一项
+     *
+     *
+     */
+    public Boolean isDefault()
+    {
+        return mIsDefault;
+    }
+
 
 
 
@@ -128,6 +132,9 @@ public class AbstractFragmentButtonView extends LinearLayout {
         //获取frameLayout的layout
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.nav_fragment_view_style, defStyleAttr, 0);
         String fragmentName= a.getString(R.styleable.nav_fragment_view_style_fragment_name);
+
+        mIsDefault=a.getBoolean(R.styleable.nav_fragment_view_style_default_first,false);
+
         a.recycle();
 
         //设置交点规则，先子控件，没有再自身
@@ -142,35 +149,12 @@ public class AbstractFragmentButtonView extends LinearLayout {
                 mFragment =(Fragment)Class.forName(s1).getConstructor().newInstance();
             } catch (Exception e) {
                 mFragment =null;
-                e.printStackTrace();
-                Toast.makeText(context,"创建Fragment对象失败:"+s1,Toast.LENGTH_SHORT).show();
-                Log.e("ybjExtend",e.toString());
+                Toast.makeText(context,context.getString(R.string.exception_ybjaa_created_fragemt_fail)+s1,Toast.LENGTH_SHORT).show();
+                Log.e("ybjExtend", e.toString());
             }
 
         }
 
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-    /**
-     *
-     * 设置按下切换fragment的事件
-     *
-     */
-    protected void setFragmentNameViewsOnClickEvent()
-    {
-        //
     }
 
 
