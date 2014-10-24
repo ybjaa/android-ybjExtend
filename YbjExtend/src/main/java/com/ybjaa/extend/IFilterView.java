@@ -14,8 +14,8 @@ public interface IFilterView {
      *
      * 验证该view是否通过验证
      *
-     * @param view
-     * @return
+     * @param view 所要验证的控件
+     * @return 验证通过返回true，否则返回false
      */
     boolean IsVerify(View view);
 }

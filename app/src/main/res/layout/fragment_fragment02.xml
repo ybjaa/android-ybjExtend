@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/button"
-        android:background="@drawable/fragment_button_view_click_background"
+        android:background="@drawable/fragment_button_view_background"
         android:layout_gravity="center" />
 
 </FrameLayout>

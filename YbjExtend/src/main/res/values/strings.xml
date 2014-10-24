@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+   
     <string name="app_name">YbjExtend</string>
     <string name="hello_world">Hello world!</string>
 
+    <!--异常处理-->
+    <string name="exception_ybjaa_created_fragemt_fail">创建Fragment对象失败:</string>
+
+    <string name="execption_ybjaa_navmenupanel_not_setting_fragmentmanager">没有设置fragmentManager</string>
+    <string name="execption_ybjaa_navmenupanel_fragment_is_null">当前fragmentView的fragment对象为空</string>
+    
 </resources>

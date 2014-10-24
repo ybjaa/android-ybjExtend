@@ -13,6 +13,11 @@ import java.util.zip.Inflater;
  */
 public class FragmentButtonView extends AbstractFragmentButtonView {
 
+    @Override
+    public void stateChange(boolean state) {
+
+    }
+
     public FragmentButtonView(Context context) {
         this(context,null);
     }

@@ -8,5 +8,6 @@
 
     <declare-styleable name="nav_fragment_view_style">
         <attr name="fragment_name" format="string" />
+        <attr name="default_first" format="boolean" />
     </declare-styleable>
 </resources>

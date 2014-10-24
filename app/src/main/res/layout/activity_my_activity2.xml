@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="test01.fragment.ybjaa.testfragment01.MyActivity2"
+    tools:ignore="MergeRootFrame" >
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="test01.fragment.ybjaa.testfragment01.BlankFragment" />
+
+
+    </FrameLayout>

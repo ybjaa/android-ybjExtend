@@ -1,19 +1,16 @@
 package com.ybjaa.extend.view;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.LinearLayout;
 
 import com.ybjaa.extend.IFilterView;
 import com.ybjaa.extend.R;
@@ -37,6 +34,7 @@ public class NavMenuPanel extends LinearLayout {
      *
      */
     FragmentManager mFragmentManager=null;
+
 
 
     /**
@@ -72,9 +70,6 @@ public class NavMenuPanel extends LinearLayout {
     public IOnFragmentViewClickListener mOnFragmentViewClickListener=null;
 
 
-    Drawable backgroundDrawable=null;
-
-
     /**
      *
      * 按下FragmentView控件的拓展接口
@@ -107,12 +102,8 @@ public class NavMenuPanel extends LinearLayout {
         @Override
         public void onClick(View v) {
 
-            Log.d("T01","mOnClickListener onClick:");
-
             if(v instanceof AbstractFragmentButtonView)
             {
-
-
 
                 AbstractFragmentButtonView view=(AbstractFragmentButtonView)v;
 
@@ -227,17 +218,6 @@ public class NavMenuPanel extends LinearLayout {
 
 
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-
-        setOnFragmentButtonViewListener();
-
-    }
-
-
-
-
     /**
      *
      * 设置针对去取到的fragmentView的控件的clcik事件绑定
@@ -262,6 +242,8 @@ public class NavMenuPanel extends LinearLayout {
 
         AbstractFragmentButtonView fView=null;
 
+        AbstractFragmentButtonView isDefaultView=null;
+
         for( View v : viewList )
         {
 
@@ -270,8 +252,19 @@ public class NavMenuPanel extends LinearLayout {
             if(fView!=null) {
                 fView.setOnTouchListener(mOnTouchListener);
                 fView.setOnClickListener(mOnClickListener);
+                if(fView.isDefault())
+                {
+                    isDefaultView=fView;
+                }
                 viewSource.add(fView);
             }
+        }
+
+
+        if(isDefaultView!=null)
+        {
+            setViewSourceState(isDefaultView);
+            isDefaultView.performClick();
         }
 
 
@@ -337,10 +330,12 @@ public class NavMenuPanel extends LinearLayout {
 
                 if(v!=view)
                 {
+                    v.stateChange(false);
                     v.setSelected(false);
                 }
                 else
                 {
+                    v.stateChange(true);
                     v.setSelected(true);
                 }
 
@@ -362,17 +357,16 @@ public class NavMenuPanel extends LinearLayout {
         Fragment fragment=view.getFragment();
 
 
-
         if(mFragmentManager==null)
         {
-            Log.d("ybjException","没有设置fragmentManager");
+            Log.e("ybjException",getContext().getString(R.string.execption_ybjaa_navmenupanel_not_setting_fragmentmanager));
 
             return;
         }
 
         if(fragment==null)
         {
-            Log.d("ybjException","当前fragmentView的fragment对象为空");
+            Log.e("ybjException",getContext().getString(R.string.execption_ybjaa_navmenupanel_fragment_is_null));
             return;
         }
 

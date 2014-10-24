@@ -54,6 +54,7 @@ public class MyActivity extends Activity {
         panel.addView(view01);
 
         panel.setFragmentManager(getFragmentManager());
+        panel.setOnFragmentButtonViewListener();
 
 
 
